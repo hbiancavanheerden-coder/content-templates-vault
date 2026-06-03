@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Template Engine</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 px-6 py-4 shadow-xs">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-xs">
+                    <i data-lucide="sparkles" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight">Template Vault</h1>
+                    <p class="text-xs text-slate-500 font-medium" id="stats-counter">Loading your content vault...</p>
+                </div>
+            </div>
+            <div class="relative w-full sm:w-96">
+                <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                <input type="text" id="search-input" placeholder="Search title, framework or description..." 
+                       class="w-full pl-10 pr-4 py-2 bg-slate-100 border border-transparent rounded-xl focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition-all outline-none text-sm">
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col lg:flex-row gap-6 min-h-[calc(100vh-85px)]">
+        
+        <aside class="w-full lg:w-80 flex flex-col gap-4 shrink-0">
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
+                <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Filter Format</h3>
+                <div class="flex flex-wrap gap-2" id="format-filters">
+                    <button class="filter-btn active bg-indigo-600 text-white px-3 py-1.5 rounded-xl text-xs font-medium transition-all" data-format="all">All</button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs flex flex-col overflow-hidden h-[300px] lg:h-[600px]">
+                <div class="p-3 bg-slate-50 border-b border-slate-200 text-xs font-medium text-slate-500 uppercase tracking-wider">
+                    Available Blueprints
+                </div>
+                <div class="overflow-y-auto divide-y divide-slate-100 flex-1" id="templates-list">
+                </div>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                
+                <section class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs sticky top-24">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span id="active-emoji" class="text-2xl">⚡</span>
+                        <div>
+                            <h2 id="active-title" class="text-lg font-bold">Select a template</h2>
+                            <p id="active-desc" class="text-xs text-slate-500">Choose from the left library deck to begin tailoring copy.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="dynamic-fields-container" class="space-y-4 border-t border-slate-100 pt-4">
+                    </div>
+                </section>
+
+                <section class="bg-slate-900 text-slate-100 p-6 rounded-2xl shadow-xl border border-slate-800 flex flex-col sticky top-24 min-h-[300px]">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Compiled Output
+                        </span>
+                        <button id="copy-button" class="bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 hover:text-white px-3 py-1.5 rounded-xl text-xs font-medium flex items-center gap-2 transition-all cursor-pointer">
+                            <i data-lucide="copy" class="w-4 h-4"></i> Copy Code
+                        </button>
+                    </div>
+                    <pre id="output-preview" class="whitespace-pre-wrap font-mono text-sm leading-relaxed text-slate-300 select-all flex-1 focus:outline-none"></pre>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let allTemplates = [];
+        let activeTemplate = null;
+        let activeFormat = 'all';
+
+        function cleanBodyText(htmlStr) {
+            let txt = document.createElement("textarea");
+            txt.innerHTML = htmlStr;
+            let decoded = txt.value;
+            
+            decoded = decoded.replace(/<\/p>/g, '\n').replace(/<\/div>/g, '\n').replace(/<br\s*\/?>/g, '\n');
+            decoded = decoded.replace(/<[^>]+>/g, '');
+            
+            decoded = decoded.replace(/â€™/g, "'")
+                             .replace(/â€œ/g, '"')
+                             .replace(/â€ /g, '"')
+                             .replace(/â€”/g, '—')
+                             .replace(/â€¢/g, '•')
+                             .replace(/&nbsp;/g, ' ');
+            
+            return decoded.replace(/\n{3,}/g, '\n\n').trim();
+        }
+
+        function extractPlaceholders(text) {
+            const regex = /\{([^}]+)\}|\[([^\]]+)\]/g;
+            const matches = [];
+            let match;
+            while ((match = regex.exec(text)) !== null) {
+                const placeholder = match[1] || match[2];
+                if (!matches.includes(placeholder)) {
+                    matches.push(placeholder);
+                }
+            }
+            return matches;
+        }
+
+        async function loadVaultData() {
+            try {
+                // Fetch targeted file asset
+                const response = await fetch('./templates.html');
+                
+                // Diagnostic Check 1: Network Check
+                if (!response.ok) {
+                    throw new Error(`⚠️ Network Error: Unable to locate templates.html (Status ${response.status}). Netlify might still be compiling or updating caches.`);
+                }
+                
+                const htmlText = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlText, 'text/html');
+                const rawJsonText = doc.body.textContent.trim();
+                
+                // Diagnostic Check 2: Content Availability Check
+                if (!rawJsonText) {
+                    throw new Error("⚠️ Content Error: The templates.html file was fetched successfully but it is completely empty.");
+                }
+
+                // Diagnostic Check 3: JSON Integrity Verification
+                let parsedPayload;
+                try {
+                    parsedPayload = JSON.parse(rawJsonText);
+                } catch (jsonErr) {
+                    throw new Error(`⚠️ Formatting Error: The data inside templates.html is invalid. Details: ${jsonErr.message}`);
+                }
+                
+                if (!parsedPayload.result || !parsedPayload.result.data || !parsedPayload.result.data.json) {
+                    throw new Error("⚠️ Structural Error: The data parsed successfully, but the expected 'result.data.json' layout array was missing.");
+                }
+
+                allTemplates = parsedPayload.result.data.json.map(item => ({
+                    ...item,
+                    cleanedBody: cleanBodyText(item.body)
+                }));
+
+                document.getElementById('stats-counter').className = "text-xs text-slate-500 font-medium";
+                document.getElementById('stats-counter').innerText = `Successfully integrated ${allTemplates.length} library engines`;
+                
+                buildFormatFilters();
+                renderTemplateDeck();
+                
+                if (allTemplates.length > 0) {
+                    selectTemplate(allTemplates[0].id);
+                }
+            } catch (err) {
+                console.error("Vault Failure Details: ", err);
+                const counterElement = document.getElementById('stats-counter');
+                counterElement.className = "text-xs text-rose-600 font-semibold bg-rose-50 px-2 py-1 rounded-md border border-rose-100 inline-block mt-1";
+                counterElement.innerText = err.message;
+            }
+        }
+
+        function buildFormatFilters() {
+            const container = document.getElementById('format-filters');
+            const formats = [...new Set(allTemplates.map(t => t.format).filter(Boolean))];
+            
+            formats.forEach(format => {
+                const btn = document.createElement('button');
+                btn.className = "filter-btn bg-slate-100 text-slate-600 hover:bg-slate-200 px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer";
+                btn.innerText = format.replace('_', ' ');
+                btn.setAttribute('data-format', format);
+                btn.onclick = () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('bg-indigo-600', 'text-white'));
+                    btn.classList.add('bg-indigo-600', 'text-white');
+                    activeFormat = format;
+                    renderTemplateDeck();
+                };
+                container.appendChild(btn);
+            });
+            
+            document.querySelector('[data-format="all"]').onclick = function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('bg-indigo-600', 'text-white'));
+                this.classList.add('bg-indigo-600', 'text-white');
+                activeFormat = 'all';
+                renderTemplateDeck();
+            };
+        }
+
+        function renderTemplateDeck() {
+            const listContainer = document.getElementById('templates-list');
+            const searchQuery = document.getElementById('search-input').value.toLowerCase();
+            listContainer.innerHTML = '';
+
+            const filtered = allTemplates.filter(t => {
+                const matchesFormat = (activeFormat === 'all' || t.format === activeFormat);
+                const matchesSearch = (t.name.toLowerCase().includes(searchQuery) || 
+                                       t.description.toLowerCase().includes(searchQuery) ||
+                                       t.cleanedBody.toLowerCase().includes(searchQuery));
+                return matchesFormat && matchesSearch;
+            });
+
+            filtered.forEach(t => {
+                const row = document.createElement('button');
+                row.className = `w-full text-left p-3.5 transition-all hover:bg-slate-50 flex items-start gap-3 cursor-pointer border-b border-slate-50 ${activeTemplate && activeTemplate.id === t.id ? 'bg-indigo-50/60 hover:bg-indigo-50/60 border-l-4 border-l-indigo-600 pl-2.5' : ''}`;
+                row.innerHTML = `
+                    <span class="text-lg shrink-0">${t.emoji || '📄'}</span>
+                    <div class="min-w-0 flex-1">
+                        <h4 class="font-semibold text-sm text-slate-800 truncate">${t.name || 'Untitled Template'}</h4>
+                        <p class="text-xs text-slate-400 truncate mt-0.5">${t.description || 'No summary parameters provided.'}</p>
+                    </div>
+                `;
+                row.onclick = () => selectTemplate(t.id);
+                listContainer.appendChild(row);
+            });
+        }
+
+        function selectTemplate(id) {
+            activeTemplate = allTemplates.find(t => t.id === id);
+            if (!activeTemplate) return;
+
+            renderTemplateDeck();
+
+            document.getElementById('active-emoji').innerText = activeTemplate.emoji || '📄';
+            document.getElementById('active-title').innerText = activeTemplate.name || 'Untitled Template';
+            document.getElementById('active-desc').innerText = activeTemplate.description || '';
+
+            const container = document.getElementById('dynamic-fields-container');
+            container.innerHTML = '';
+
+            const fields = extractPlaceholders(activeTemplate.cleanedBody);
+            
+            if (fields.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400 italic">Static architecture formula base pattern. Direct compile copy ready.</p>`;
+            } else {
+                fields.forEach(field => {
+                    const block = document.createElement('div');
+                    block.className = "flex flex-col gap-1.5";
+                    block.innerHTML = `
+                        <label class="text-xs font-semibold text-slate-600">${field}</label>
+                        <input type="text" data-field="${field}" placeholder="Type text for [${field}]..." 
+                               class="field-input px-3 py-2 border border-slate-200 rounded-xl text-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-50 transition-all outline-none">
+                    `;
+                    container.appendChild(block);
+                });
+                
+                document.querySelectorAll('.field-input').forEach(input => {
+                    input.addEventListener('input', updateCompiledOutputPreview);
+                });
+            }
+
+            updateCompiledOutputPreview();
+        }
+
+        function updateCompiledOutputPreview() {
+            if (!activeTemplate) return;
+            let resultText = activeTemplate.cleanedBody;
+            
+            document.querySelectorAll('.field-input').forEach(input => {
+                const variableKey = input.getAttribute('data-field');
+                const userValue = input.value.trim();
+                
+                const finalReplacementText = userValue ? userValue : `[${variableKey}]`;
+                
+                resultText = resultText.split(`{${variableKey}}`).join(finalReplacementText);
+                resultText = resultText.split(`[${variableKey}]`).join(finalReplacementText);
+            });
+
+            document.getElementById('output-preview').innerText = resultText;
+        }
+
+        document.getElementById('copy-button').onclick = async function() {
+            const textToCopy = document.getElementById('output-preview').innerText;
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                const originalInner = this.innerHTML;
+                this.innerHTML = `<i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Copied!`;
+                this.classList.replace('bg-slate-800', 'bg-slate-900');
+                lucide.createIcons();
+                setTimeout(() => {
+                    this.innerHTML = originalInner;
+                    this.classList.replace('bg-slate-900', 'bg-slate-800');
+                    lucide.createIcons();
+                }, 2000);
+            } catch (err) {
+                alert("Clipboard allocation permissions denied. Select all and press Ctrl+C manually.");
+            }
+        };
+
+        document.getElementById('search-input').addEventListener('input', renderTemplateDeck);
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadVaultData();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
