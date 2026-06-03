@@ -1,0 +1,343 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;Creator Template Engine&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body class="bg-slate-50 text-slate-900 font-sans antialiased"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;header class="bg-white border-b border-slate-200 sticky top-0 z-50 px-6 py-4 shadow-xs"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="flex items-center gap-3"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="bg-indigo-600 text-white p-2 rounded-xl shadow-xs"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;i data-lucide="sparkles" class="w-6 h-6"&gt;&lt;/i&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h1 class="text-xl font-bold tracking-tight"&gt;Template Vault&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="text-xs text-slate-500" id="stats-counter"&gt;Loading your content vault...&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="relative w-full sm:w-96"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"&gt;&lt;/i&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;input type="text" id="search-input" placeholder="Search title, framework or description..."<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                       </span>class="w-full pl-10 pr-4 py-2 bg-slate-100 border border-transparent rounded-xl focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition-all outline-none text-sm"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/header&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="max-w-7xl mx-auto px-4 py-6 flex flex-col lg:flex-row gap-6 min-h-[calc(100vh-85px)]"&gt;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;aside class="w-full lg:w-80 flex flex-col gap-4 shrink-0"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3"&gt;Filter Format&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="flex flex-wrap gap-2" id="format-filters"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button class="filter-btn active bg-indigo-600 text-white px-3 py-1.5 rounded-xl text-xs font-medium transition-all" data-format="all"&gt;All&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white rounded-2xl border border-slate-200 shadow-xs flex flex-col overflow-hidden h-[300px] lg:h-[600px]"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="p-3 bg-slate-50 border-b border-slate-200 text-xs font-medium text-slate-500 uppercase tracking-wider"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>Available Blueprints</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="overflow-y-auto divide-y divide-slate-100 flex-1" id="templates-list"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/aside&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;main class="flex-1 flex flex-col gap-6"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start"&gt;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;section class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs sticky top-24"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="flex items-center gap-2 mb-4"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span id="active-emoji" class="text-2xl"&gt;⚡&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;h2 id="active-title" class="text-lg font-bold"&gt;Select a template&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p id="active-desc" class="text-xs text-slate-500"&gt;Choose from the left library deck to begin tailoring copy.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div id="dynamic-fields-container" class="space-y-4 border-t border-slate-100 pt-4"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;section class="bg-slate-900 text-slate-100 p-6 rounded-2xl shadow-xl border border-slate-800 flex flex-col sticky top-24 min-h-[300px]"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"&gt;&lt;/span&gt; Compiled Output</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;button id="copy-button" class="bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 hover:text-white px-3 py-1.5 rounded-xl text-xs font-medium flex items-center gap-2 transition-all cursor-pointer"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;i data-lucide="copy" class="w-4 h-4"&gt;&lt;/i&gt; Copy Code</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;pre id="output-preview" class="whitespace-pre-wrap font-mono text-sm leading-relaxed text-slate-300 select-all flex-1 focus:outline-none"&gt;&lt;/pre&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/main&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let allTemplates = [];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let activeTemplate = null;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let activeFormat = 'all';</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Clean database formatting tags, entity escapes, and encoding anomalies</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function cleanBodyText(htmlStr) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let txt = document.createElement("textarea");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>txt.innerHTML = htmlStr;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let decoded = txt.value;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>decoded = decoded.replace(/&lt;\/p&gt;/g, '\n').replace(/&lt;\/div&gt;/g, '\n').replace(/&lt;br\s*\/?&gt;/g, '\n');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>decoded = decoded.replace(/&lt;[^&gt;]+&gt;/g, '');</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>decoded = decoded.replace(/â€™/g, "'")</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                             </span>.replace(/â€œ/g, '"')</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                             </span>.replace(/â€ /g, '"')</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                             </span>.replace(/â€”/g, '—')</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                             </span>.replace(/â€¢/g, '•')</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                             </span>.replace(/&amp;nbsp;/g, ' ');</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>return decoded.replace(/\n{3,}/g, '\n\n').trim();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Auto-discover template placeholder variables via pattern matching</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function extractPlaceholders(text) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const regex = /\{([^}]+)\}|\[([^\]]+)\]/g;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const matches = [];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let match;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>while ((match = regex.exec(text)) !== null) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const placeholder = match[1] || match[2];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (!matches.includes(placeholder)) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>matches.push(placeholder);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>return matches;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// UPGRADED MULTI-VAULT LOAD ROUTINE</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Reads from templates.html plus templates_1.html up to templates_10.html dynamically.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>async function loadVaultData() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Define your distributed data pack files list to reach 500+ items cleanly</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const filesToFetch = [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>'./templates.html',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>'./templates_1.html',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>'./templates_2.html',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>'./templates_3.html',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>'./templates_4.html',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>'./templates_5.html',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>'./templates_6.html',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>'./templates_7.html',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>'./templates_8.html',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>'./templates_9.html',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>'./templates_10.html'</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>];</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>allTemplates = [];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const parser = new DOMParser();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Progressively scan, parse, decode and compile all chunks present inside folders environment</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>for (const file of filesToFetch) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>try {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const response = await fetch(file);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (!response.ok) continue; // Silently skip files that aren't created yet without throwing errors</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const htmlText = await response.text();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const doc = parser.parseFromString(htmlText, 'text/html');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const rawJsonText = doc.body.textContent.trim();</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (!rawJsonText) continue;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const parsedPayload = JSON.parse(rawJsonText);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (parsedPayload &amp;&amp; parsedPayload.result &amp;&amp; parsedPayload.result.data &amp;&amp; parsedPayload.result.data.json) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>const chunks = parsedPayload.result.data.json.map(item =&gt; ({</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>...item,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>cleanedBody: cleanBodyText(item.body)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>}));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>// Concatenate single files array chunks cleanly into main dataset engine</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>allTemplates = allTemplates.concat(chunks);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>} catch (err) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>console.log(`Note: Local storage file entry ${file} skipped or not yet initialized.`);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Sync visual components updates across systems mapping</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (allTemplates.length &gt; 0) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('stats-counter').innerText = `Successfully integrated ${allTemplates.length} library engines`;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>buildFormatFilters();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>renderTemplateDeck();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>selectTemplate(allTemplates[0].id);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('stats-counter').innerText = "System loading mismatch: Verify templates.html or your chunk data files exist.";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Generate categorical dynamic filter pill headers</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function buildFormatFilters() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const container = document.getElementById('format-filters');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Re-initialize containers clearly to prevent element duplication processing loops</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>container.innerHTML = `&lt;button class="filter-btn active bg-indigo-600 text-white px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer" data-format="all"&gt;All&lt;/button&gt;`;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const formats = [...new Set(allTemplates.map(t =&gt; t.format).filter(Boolean))];</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>formats.forEach(format =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const btn = document.createElement('button');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>btn.className = "filter-btn bg-slate-100 text-slate-600 hover:bg-slate-200 px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>btn.innerText = format.replace('_', ' ');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>btn.setAttribute('data-format', format);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>btn.onclick = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>document.querySelectorAll('.filter-btn').forEach(b =&gt; b.classList.remove('bg-indigo-600', 'text-white'));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>btn.classList.add('bg-indigo-600', 'text-white');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>activeFormat = format;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>renderTemplateDeck();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>};</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>container.appendChild(btn);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Reassign base default baseline click handlers parameters</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.querySelector('[data-format="all"]').onclick = function() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.querySelectorAll('.filter-btn').forEach(b =&gt; b.classList.remove('bg-indigo-600', 'text-white'));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>this.classList.add('bg-indigo-600', 'text-white');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>activeFormat = 'all';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>renderTemplateDeck();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Render dynamic navigation view matching criteria selections</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function renderTemplateDeck() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const listContainer = document.getElementById('templates-list');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const searchQuery = document.getElementById('search-input').value.toLowerCase();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>listContainer.innerHTML = '';</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const filtered = allTemplates.filter(t =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const matchesFormat = (activeFormat === 'all' || t.format === activeFormat);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const matchesSearch = (t.name.toLowerCase().includes(searchQuery) ||<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                       </span>t.description.toLowerCase().includes(searchQuery) ||</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                       </span>t.cleanedBody.toLowerCase().includes(searchQuery));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>return matchesFormat &amp;&amp; matchesSearch;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>filtered.forEach(t =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const row = document.createElement('button');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>row.className = `w-full text-left p-3.5 transition-all hover:bg-slate-50 flex items-start gap-3 cursor-pointer border-b border-slate-50 ${activeTemplate &amp;&amp; activeTemplate.id === t.id ? 'bg-indigo-50/60 hover:bg-indigo-50/60 border-l-4 border-l-indigo-600 pl-2.5' : ''}`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>row.innerHTML = `</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;span class="text-lg shrink-0"&gt;${t.emoji || '📄'}&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="min-w-0 flex-1"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h4 class="font-semibold text-sm text-slate-800 truncate"&gt;${t.name || 'Untitled Template'}&lt;/h4&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs text-slate-400 truncate mt-0.5"&gt;${t.description || 'No summary parameters provided.'}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>row.onclick = () =&gt; selectTemplate(t.id);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>listContainer.appendChild(row);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Focus interactive workspace controls on specific targeted dynamic component choice</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function selectTemplate(id) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>activeTemplate = allTemplates.find(t =&gt; t.id === id);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (!activeTemplate) return;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Highlight row background selectors</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>renderTemplateDeck();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('active-emoji').innerText = activeTemplate.emoji || '📄';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('active-title').innerText = activeTemplate.name || 'Untitled Template';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('active-desc').innerText = activeTemplate.description || '';</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const container = document.getElementById('dynamic-fields-container');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>container.innerHTML = '';</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const fields = extractPlaceholders(activeTemplate.cleanedBody);</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (fields.length === 0) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>container.innerHTML = `&lt;p class="text-xs text-slate-400 italic"&gt;Static architecture formula base pattern. Direct compile copy ready.&lt;/p&gt;`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>fields.forEach(field =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const block = document.createElement('div');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>block.className = "flex flex-col gap-1.5";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>block.innerHTML = `</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;label class="text-xs font-semibold text-slate-600"&gt;${field}&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;input type="text" data-field="${field}" placeholder="Type text for [${field}]..."<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                               </span>class="field-input px-3 py-2 border border-slate-200 rounded-xl text-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-50 transition-all outline-none"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>container.appendChild(block);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// Bind keystroke triggers for real-time live preview updates</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.querySelectorAll('.field-input').forEach(input =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>input.addEventListener('input', updateCompiledOutputPreview);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>updateCompiledOutputPreview();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Refresh text rendering engine calculations parameters adjustments outputs</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function updateCompiledOutputPreview() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (!activeTemplate) return;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let resultText = activeTemplate.cleanedBody;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.field-input').forEach(input =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const variableKey = input.getAttribute('data-field');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const userValue = input.value.trim();</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const finalReplacementText = userValue ? userValue : `[${variableKey}]`;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>resultText = resultText.split(`{${variableKey}}`).join(finalReplacementText);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>resultText = resultText.split(`[${variableKey}]`).join(finalReplacementText);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('output-preview').innerText = resultText;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Copy outputs buffer context straight into systemic OS clipboards vectors</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>document.getElementById('copy-button').onclick = async function() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const textToCopy = document.getElementById('output-preview').innerText;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>try {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>await navigator.clipboard.writeText(textToCopy);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const originalInner = this.innerHTML;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>this.innerHTML = `&lt;i data-lucide="check" class="w-4 h-4 text-emerald-400"&gt;&lt;/i&gt; Copied!`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>this.classList.replace('bg-slate-800', 'bg-slate-900');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>lucide.createIcons();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>setTimeout(() =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>this.innerHTML = originalInner;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>this.classList.replace('bg-slate-900', 'bg-slate-800');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>lucide.createIcons();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}, 2000);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} catch (err) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>alert("Clipboard allocation permissions denied. Select all and press Ctrl+C manually.");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Real-time input search event bindings listener</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>document.getElementById('search-input').addEventListener('input', renderTemplateDeck);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// System Startup Runtime Ignition</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>window.addEventListener('DOMContentLoaded', () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>loadVaultData();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>lucide.createIcons();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+</body>
+</html>
